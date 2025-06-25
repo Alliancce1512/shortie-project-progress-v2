@@ -26,6 +26,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 
+// Short code
 app.MapGet("/r/{shortCode}", async (string shortCode, HttpContext httpContext, ShortieDbContext db) =>
 {
     var url = await db.Urls.FirstOrDefaultAsync(u => u.ShortCode == shortCode);
@@ -63,6 +64,7 @@ app.MapGet("/r/{shortCode}", async (string shortCode, HttpContext httpContext, S
     return Results.Redirect(url.LongUrl);
 });
 
+// Secret code
 app.MapGet("/s/{secretCode}", async (string secretCode, ShortieDbContext db) =>
 {
     var url = await db.Urls.FirstOrDefaultAsync(u => u.SecretCode == secretCode);
@@ -73,6 +75,7 @@ app.MapGet("/s/{secretCode}", async (string secretCode, ShortieDbContext db) =>
     return Results.Redirect($"http://localhost:3000/stats/{secretCode}");
 });
 
+// Stats
 app.MapGet("/api/stats/{secretCode}", async (string secretCode, ShortieDbContext db) =>
 {
     var url = await db.Urls.FirstOrDefaultAsync(u => u.SecretCode == secretCode);

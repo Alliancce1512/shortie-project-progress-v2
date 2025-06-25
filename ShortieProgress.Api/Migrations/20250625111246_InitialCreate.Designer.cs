@@ -12,7 +12,7 @@ using ShortieProgress.Api.Data;
 namespace ShortieProgress.Api.Migrations
 {
     [DbContext(typeof(ShortieDbContext))]
-    [Migration("20250625075225_InitialCreate")]
+    [Migration("20250625111246_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -37,7 +37,10 @@ namespace ShortieProgress.Api.Migrations
                         .HasColumnType("date");
 
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.HasKey("UrlId", "IpAddress", "Date");
 
@@ -98,7 +101,38 @@ namespace ShortieProgress.Api.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UrlId");
+
                     b.ToTable("Visits");
+                });
+
+            modelBuilder.Entity("ShortieProgress.Api.Models.DailyUnique", b =>
+                {
+                    b.HasOne("ShortieProgress.Api.Models.Url", "Url")
+                        .WithMany("DailyUniques")
+                        .HasForeignKey("UrlId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Url");
+                });
+
+            modelBuilder.Entity("ShortieProgress.Api.Models.Visit", b =>
+                {
+                    b.HasOne("ShortieProgress.Api.Models.Url", "Url")
+                        .WithMany("Visits")
+                        .HasForeignKey("UrlId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Url");
+                });
+
+            modelBuilder.Entity("ShortieProgress.Api.Models.Url", b =>
+                {
+                    b.Navigation("DailyUniques");
+
+                    b.Navigation("Visits");
                 });
 #pragma warning restore 612, 618
         }

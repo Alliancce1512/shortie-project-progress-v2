@@ -7,4 +7,7 @@ public class Url
     public string ShortCode { get; set; } = string.Empty;
     public string SecretCode { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    
+    public List<Visit> Visits { get; set; } = new();
+    public List<DailyUnique> DailyUniques { get; set; } = new();
 }

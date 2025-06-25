@@ -12,20 +12,6 @@ namespace ShortieProgress.Api.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "DailyUniques",
-                columns: table => new
-                {
-                    UrlId = table.Column<int>(type: "int", nullable: false),
-                    IpAddress = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Date = table.Column<DateOnly>(type: "date", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DailyUniques", x => new { x.UrlId, x.IpAddress, x.Date });
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Urls",
                 columns: table => new
                 {
@@ -42,6 +28,27 @@ namespace ShortieProgress.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DailyUniques",
+                columns: table => new
+                {
+                    UrlId = table.Column<int>(type: "int", nullable: false),
+                    IpAddress = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Date = table.Column<DateOnly>(type: "date", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DailyUniques", x => new { x.UrlId, x.IpAddress, x.Date });
+                    table.ForeignKey(
+                        name: "FK_DailyUniques_Urls_UrlId",
+                        column: x => x.UrlId,
+                        principalTable: "Urls",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Visits",
                 columns: table => new
                 {
@@ -54,6 +61,12 @@ namespace ShortieProgress.Api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Visits", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Visits_Urls_UrlId",
+                        column: x => x.UrlId,
+                        principalTable: "Urls",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -67,6 +80,11 @@ namespace ShortieProgress.Api.Migrations
                 table: "Urls",
                 column: "ShortCode",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Visits_UrlId",
+                table: "Visits",
+                column: "UrlId");
         }
 
         /// <inheritdoc />
@@ -76,10 +94,10 @@ namespace ShortieProgress.Api.Migrations
                 name: "DailyUniques");
 
             migrationBuilder.DropTable(
-                name: "Urls");
+                name: "Visits");
 
             migrationBuilder.DropTable(
-                name: "Visits");
+                name: "Urls");
         }
     }
 }
