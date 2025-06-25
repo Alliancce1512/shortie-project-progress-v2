@@ -1,0 +1,6 @@
+@ShortieProgress.Api_HostAddress = http://localhost:5044
+
+GET {{ShortieProgress.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
