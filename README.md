@@ -1,4 +1,4 @@
-# ShortieProgress.Api — .NET 9 URL Shortener Backend
+# Shortie — .NET 9 URL Shortener Backend
 
 This is the backend service for the Shortie URL Shortener.  
 Built with **ASP.NET Core 9 Web API** and **Entity Framework Core**, it handles:
