@@ -1,6 +1,6 @@
 -- Insert test URL
 INSERT INTO Urls (LongUrl, ShortCode, SecretCode, CreatedAt)
-VALUES ('https://example.com', 'test01', 'secret00000000000001', GETDATE());
+VALUES ('https://progress.com', 'uqzsre', '1ccd40a7f6be5c1da48d', GETDATE());
 
 -- Insert test visits
 INSERT INTO Visits (UrlId, IpAddress, VisitedAt)
