@@ -39,36 +39,23 @@ Built with **ASP.NET Core 9 Web API** and **Entity Framework Core**, it handles:
 
 ### 1. Clone the Repo
 
-You can clone via the IDE or locally from your Terminal by running:
+You can clone via your IDE or by running the following in your terminal:
 
 ```bash
 git clone https://github.com/Alliancce1512/shortie-project-progress-v2.git
-cd ShortieProgress.Api
+cd shortie-project-progress-v2
 ```
 
 ---
 
-### 2. Restore & Build
+### 2. Restore & Build the Solution
 
 ```bash
 dotnet restore
 dotnet build
 ```
 
----
-
-### 3. Setup Docker MSSQL Server
-
-Create your MSSQL Server in Docker:
-
-```bash
-docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=SuperSecretPassword123" \
--p 1433:1433 --name sqlshortie -d mcr.microsoft.com/mssql/server:2022-latest
-```
-
-### 4. Setup the Database
-
-After the MSSQL Server is created run in the project Terminal:
+### 3. Start the SQL Server and Prepare the Database
 
 ```bash
 chmod +x scripts/setup.sh
@@ -76,21 +63,27 @@ chmod +x scripts/setup.sh
 ```
 
 This script will:
-- Run EF Core migrations
-- Seed test data (`Urls`, `Visits`, `DailyUniques`)
+- Start the Docker MSSQL Server
+- Apply EF Core migrations
+- Seed the database with test data (`Urls`, `Visits`, `DailyUniques`)
 
 > The DB connection string is configured in `appsettings.json`.
 
 ---
 
-### 5. Run the API
+### 4. Run the API
 
 ```bash
 dotnet run --project ShortieProgress.Api
 ```
 
 By default it runs on:  
-`https://localhost:5044` (with Swagger UI available on `https://localhost:5044/swagger`)
+- `https://localhost:5044`
+- Swagger UI: https://localhost:5044/swagger
+
+After running the project, you can test:
+- Redirect URL: http://localhost:5044/r/uqzsre
+- Secret Stats Page Redirect: http://localhost:5044/s/1ccd40a7f6be5c1da48d
 
 ---
 
@@ -104,7 +97,7 @@ Create a short URL:
 
 ```json
 {
-  "longUrl": "https://example.com"
+  "longUrl": "https://progress.com"
 }
 ```
 
@@ -114,8 +107,8 @@ Create a short URL:
 {
   "status": 0,
   "status_message": "Command completed successfully",
-  "shortUrl": "https://localhost:5044/r/abc123",
-  "secretUrl": "https://localhost:5044/s/secretcode1234567890"
+  "shortUrl": "https://localhost:5044/r/uqzsre",
+  "secretUrl": "https://localhost:5044/s/1ccd40a7f6be5c1da48d"
 }
 ```
 
