@@ -39,8 +39,10 @@ Built with **ASP.NET Core 9 Web API** and **Entity Framework Core**, it handles:
 
 ### 1. Clone the Repo
 
+You can clone via the IDE or locally from your Terminal by running:
+
 ```bash
-git clone https://github.com/YourUsername/ShortieProgress.Api.git
+git clone https://github.com/Alliancce1512/shortie-project-progress-v2.git
 cd ShortieProgress.Api
 ```
 
@@ -55,11 +57,18 @@ dotnet build
 
 ---
 
-### 3. Setup the Database
+### 3. Setup Docker MSSQL Server
 
-You’ll need to have SQL Server running locally (or via Docker).
+Create your MSSQL Server in Docker:
 
-Then run:
+```bash
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=SuperSecretPassword123" \
+-p 1433:1433 --name sqlshortie -d mcr.microsoft.com/mssql/server:2022-latest
+```
+
+### 4. Setup the Database
+
+After the MSSQL Server is created run in the project Terminal:
 
 ```bash
 chmod +x scripts/setup.sh
@@ -74,7 +83,7 @@ This script will:
 
 ---
 
-### 4. Run the API
+### 5. Run the API
 
 ```bash
 dotnet run --project ShortieProgress.Api

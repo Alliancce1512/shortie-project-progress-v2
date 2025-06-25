@@ -7,7 +7,7 @@ DB_NAME="ShortieDb"
 DB_USER="sa"
 DB_HOST="localhost"
 DB_PORT="1433"
-DB_PASS="Nenormalen0252"
+DB_PASS="SuperSecretPassword123"
 PROJECT_NAME="ShortieProgress.Api"
 CONTEXT="ShortieDbContext"
 # ----------------------
