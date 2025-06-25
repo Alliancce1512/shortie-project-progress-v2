@@ -81,7 +81,7 @@ dotnet run --project ShortieProgress.Api
 ```
 
 By default it runs on:  
-`https://localhost:5044` (with Swagger UI available)
+`https://localhost:5044` (with Swagger UI available on `https://localhost:5044/swagger`)
 
 ---
 
@@ -105,8 +105,8 @@ Create a short URL:
 {
   "status": 0,
   "status_message": "Command completed successfully",
-  "shortUrl": "https://shortie.presiyangeorgiev.eu/r/abc123",
-  "secretUrl": "https://shortie.presiyangeorgiev.eu/s/secretcode1234567890"
+  "shortUrl": "https://localhost:5044/r/abc123",
+  "secretUrl": "https://localhost:5044/s/secretcode1234567890"
 }
 ```
 
