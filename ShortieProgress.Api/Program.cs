@@ -23,7 +23,7 @@ builder.Services.AddSwaggerGen();
 
 // DB context
 builder.Services.AddDbContext<ShortieDbContext>(options =>
-    options.UseSqlServer("Server=localhost,1433;Database=ShortieDb;User Id=sa;Password=Nenormalen0252;TrustServerCertificate=True"));
+    options.UseSqlServer("Server=localhost,1433;Database=ShortieDb;User Id=sa;Password=SuperSecretPassword123;TrustServerCertificate=True"));
 
 var app = builder.Build();
 

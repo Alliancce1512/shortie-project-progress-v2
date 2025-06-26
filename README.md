@@ -57,9 +57,15 @@ dotnet build
 
 ### 3. Start the SQL Server and Prepare the Database
 
+If you're on macOS or Linux:
 ```bash
 chmod +x scripts/setup.sh
 ./scripts/setup.sh
+```
+
+If you're on Windows (Git Bash):
+```bash
+bash scripts/setup.sh
 ```
 
 This script will:

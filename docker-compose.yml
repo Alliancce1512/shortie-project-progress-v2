@@ -1,8 +1,10 @@
 version: '3.8'
+
 services:
-  sqlserver:
+  shortie-mssql:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: shortie-mssql
+    platform: linux/amd64
     environment:
       SA_PASSWORD: "SuperSecretPassword123"
       ACCEPT_EULA: "Y"
@@ -10,6 +12,11 @@ services:
       - "1433:1433"
     volumes:
       - mssql-data:/var/opt/mssql
+    networks:
+      - shortie-net
+
+networks:
+  shortie-net:
 
 volumes:
   mssql-data:
