@@ -4,6 +4,18 @@ using ShortieProgress.Api.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:5173")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
+
 // Services
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -21,6 +33,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("AllowFrontend");
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
@@ -72,7 +86,7 @@ app.MapGet("/s/{secretCode}", async (string secretCode, ShortieDbContext db) =>
     if (url == null)
         return Results.NotFound(new { status = 1, status_message = "Secret URL not found" });
 
-    return Results.Redirect($"http://localhost:3000/stats/{secretCode}");
+    return Results.Redirect($"http://localhost:5173/stats/{secretCode}");
 });
 
 // Stats

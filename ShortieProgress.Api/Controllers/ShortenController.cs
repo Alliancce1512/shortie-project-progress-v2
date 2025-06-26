@@ -40,8 +40,8 @@ public class ShortenController : ControllerBase
         {
             status = 0,
             status_message = "Command completed successfully!",
-            shortUrl = $"https://shortie.presiyangeorgiev.eu/r/{shortCode}",
-            secretUrl = $"https://shortie.presiyangeorgiev.eu/s/{secretCode}"
+            shortUrl = $"http://localhost:5044/r/{shortCode}",
+            secretUrl = $"http://localhost:5044/s/{secretCode}"
         });
     }
 

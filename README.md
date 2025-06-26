@@ -123,7 +123,7 @@ Redirects the user to the long URL. Logs the visit and checks for daily unique.
 ### GET `/s/{secretCode}`
 
 Redirects to frontend stats page:  
-`http://localhost:3000/stats/{secretCode}`
+`http://localhost:5173/stats/{secretCode}`
 
 ---
 
